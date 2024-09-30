@@ -1,9 +1,6 @@
 //@ts-check
-
-/** @type {HTMLCanvasElement} */
-//@ts-ignore canvas is an HTMLCanvasElement
-const canvas = document.getElementById("game-canvas");
-
-/** @type {CanvasRenderingContext2D} */
-//@ts-ignore ctx is a CanvasRenderingContext2D object
-const ctx = canvas.getContext("2d");
+import { canvas, ctx, } from "./common/canvas.js";
+import { Player } from "./player.js";
+let player = new Player();
+player.draw();
+console.log ("hello");
