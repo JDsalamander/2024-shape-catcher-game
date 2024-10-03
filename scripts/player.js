@@ -8,7 +8,7 @@ export class Player {
         this.width = 75;
         this.height = 25;
 
-        this.speed = 1;
+        this.speed = 100;
         
         this.keyBindings = {
             up: "ArrowUp",
@@ -29,7 +29,7 @@ export class Player {
 
     wireUpKeyboard() {
         window.addEventListener("keydown", (e) => {
-            console.log(e);
+            //console.log(e);
 
             switch(e.code) {
                 case this.keyBindings.up:
@@ -41,14 +41,14 @@ export class Player {
                 case this.keyBindings.left:
                     this.moving.left = true;
                     break;
-                case this.keyBindings.up:
+                case this.keyBindings.right:
                     this.moving.right = true;
                     break;
             }
         });
 
         window.addEventListener("keyup", (e) => {
-            console.log(e);
+            //console.log(e);
             switch(e.code) {
                 case this.keyBindings.up:
                     this.moving.up = false;
@@ -59,7 +59,7 @@ export class Player {
                 case this.keyBindings.left:
                     this.moving.left = false;
                     break;
-                case this.keyBindings.up:
+                case this.keyBindings.right:
                     this.moving.right = false;
                     break;
             }
@@ -78,6 +78,10 @@ export class Player {
             directionY = 1;
         }
 
+        if (this.moving.up && this.moving.down) {
+            directionY = 0
+        }
+
         if (this.moving.left) {
             directionX = -1;
         }
@@ -86,8 +90,34 @@ export class Player {
             directionX = 1;
         }
 
+        if (this.moving.left && this.moving.right) {
+            directionX = 0;
+        }
+
         this.y += this.speed * directionY
         this.x += this.speed * directionX
+
+        //prevent going off left
+        if (this.x < 0) {
+            this.x = 0
+        }
+        
+        
+
+        //prevent going off top
+        if (this.y < 0) {
+            this.y = 0
+        }
+
+        //prevent going off right
+        if (this.x + this.width > canvas.width) {
+            this.x = canvas.width - this.width;
+        }
+
+        //prevent going off bottom
+        if (this.y + this.height > canvas.height) {
+            this.y = canvas.height - this.height;
+        }
     }
 
     draw() {
