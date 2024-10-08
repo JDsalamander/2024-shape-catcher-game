@@ -8,7 +8,7 @@ export class Player {
         this.width = 75;
         this.height = 25;
 
-        this.speed = 100;
+        this.speed = 10;
         
         this.keyBindings = {
             up: "ArrowUp",
@@ -101,8 +101,6 @@ export class Player {
         if (this.x < 0) {
             this.x = 0
         }
-        
-        
 
         //prevent going off top
         if (this.y < 0) {
@@ -123,6 +121,5 @@ export class Player {
     draw() {
         ctx.fillStyle = "blue";
         ctx.fillRect(this.x, this.y, this.width, this.height);
-       
     }
 }

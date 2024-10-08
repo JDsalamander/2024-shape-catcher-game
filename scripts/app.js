@@ -1,10 +1,11 @@
 //@ts-check
 import { canvas, ctx, } from "./common/canvas.js";
 import { Player } from "./player.js";
+import { SimpleGoodItem } from "./collectables/good.js"
 
 let player = new Player();
-player.draw();
-console.log ("hello");
+
+let item1 = new SimpleGoodItem(canvas.width / 2, canvas.height / 2);
 
 let lastTimeStamp = 0;
 
@@ -16,8 +17,11 @@ function gameLoop(timestamp) {
 
     player.update();
     player.draw();  
-    window.requestAnimationFrame(gameLoop);
 
+    item1.update(elapsedTime);
+    item1.draw();
+
+    window.requestAnimationFrame(gameLoop);
 }
 
 window.requestAnimationFrame(gameLoop);
